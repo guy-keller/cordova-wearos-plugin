@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-wearos-plugin"
+    version="1.0.0">
+
+    <name>cordova-wearos-plugin</name>
+    <description>Communication from your Cordova application to a WearOs application.</description>
+    <author>Gui Keller</author>
+    <license>MIT</license>
+    <keywords>Android, WearOs, Watch, Wearable</keywords>
+    <repo>https://github.com/guikeller/cordova-wearos-plugin</repo>
+    <issue>https://github.com/guikeller/cordova-wearos-plugin/issues</issue>
+    
+    <engines>
+        <engine name="cordova" version=">=7.1.0" />
+        <engine name="cordova-android" version=">=7.0.0" />
+    </engines>
+    
+    <platform name="android">
+
+        <!-- WearOs Dependencies -->
+        <framework src="com.google.android.gms:play-services-base:+" />
+        <framework src="com.google.android.gms:play-services-wearable:+" />
+
+        <!-- Using an aar lib, hence no messing around too much with the conf -->
+        <resource-file src="src/android/lib/cordova-wearos-plugin.aar" target="libs/cordova-wearos-plugin.aar" />
+        <framework src="src/android/cordova-wearos-plugin.gradle" custom="true" type="gradleReference" />
+    
+        <!-- The 'feature name' value is then available on the www/*-plugin.js file -->
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="CordovaWearOsPlugin" >
+                <param name="android-package" value="com.github.guikeller.cordova.wearos.CordovaWearOsPlugin"/>
+            </feature>
+        </config-file>
+
+        <!-- The JS file that invokes the Java lib -->
+        <js-module src="www/cordova-wearos-plugin.js" name="WearOsPlugin">
+            <clobbers target="cordova.WearOsPlugin" />
+            <clobbers target="window.WearOsPlugin" />
+        </js-module>
+        
+    </platform>
+</plugin>

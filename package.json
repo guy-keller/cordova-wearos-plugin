@@ -1,0 +1,40 @@
+{
+    "name": "cordova-wearos-plugin",
+    "version": "1.0.0",
+    "description": "Communication from your Cordova application to a WearOS application.",
+    "cordova": {
+      "id": "cordova-wearos-plugin",
+      "platforms": [
+        "android"
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/guikeller/cordova-wearos-plugin.git"
+    },
+    "keywords": [
+      "Android",
+      "WearOs",
+      "Watch",
+      "Wearable",
+      "ecosystem:cordova",
+      "cordova-android"
+    ],
+    "engines": [
+      {
+        "name": "cordova",
+        "version": ">=7.1.0"
+      },
+      {
+        "name": "cordova-android",
+        "version": ">=7.0.0"
+      }
+    ],
+    "author": "Gui Keller",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/guikeller/cordova-wearos-plugin/issues"
+    },
+    "homepage": "https://github.com/guikeller/cordova-wearos-plugin"
+  }
+  
