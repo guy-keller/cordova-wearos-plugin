@@ -42,7 +42,7 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
     var initWatchSuccess = function() {
         // Sends a message through 'sendMessage'
         var message = {message: "hello from phone", value: "1234", foo: "bar"};
-        WearOsPlugin.sendMessage(message, sendMessageSuccess, sendMessageFailure);    
+        WearOsPlugin.sendMessage(sendMessageSuccess, sendMessageFailure, message);
 	    // Register to receive messages
         WearOsPlugin.registerMessageListener(receiveMessageSuccess, receiveMessageFailure);
     };
