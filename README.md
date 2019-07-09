@@ -59,6 +59,13 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
 // WearOs Message Path - to send/listen
 messagePath#id: '/cordova/plugin/wearos'
 ```
+## Extra info
+In case your build fails after installing this plugin;<br>
+You will need to also install the following plugins below. 
+```js
+cordova-plugin-androidx
+cordova-plugin-androidx-adapter
+```
 
 ## Credits
 [Gui Keller](https://www.github.com/guikeller)
