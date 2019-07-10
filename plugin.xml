@@ -20,8 +20,9 @@
     <platform name="android">
 
         <!-- WearOs Dependencies -->
-        <framework src="com.google.android.gms:play-services-base:11.8.0" />
-        <framework src="com.google.android.gms:play-services-wearable:11.8.0" />
+        <preference name="PLAY_SERVICES_VERSION" default="11+"/>
+        <framework src="com.google.android.gms:play-services-base:$PLAY_SERVICES_VERSION" />
+        <framework src="com.google.android.gms:play-services-wearable:$PLAY_SERVICES_VERSION" />
 
         <!-- Using an aar lib, hence no messing around too much with the conf -->
         <resource-file src="src/android/lib/cordova-wearos-plugin.aar" target="libs/cordova-wearos-plugin.aar" />
