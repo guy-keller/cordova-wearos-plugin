@@ -53,11 +53,41 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
     // Starts things up
     WearOsPlugin.init(initWatchSuccess, initWatchFailure);
 ```
-## Use from WearOs
+## Use from WearOs (Java)
+Step 1: You will need to create a listener:
+```java
+public class MyMessageListener implements MessageClient.OnMessageReceivedListener {
 
-```js
-// WearOs Message Path - to send/listen
-messagePath#id: '/cordova/plugin/wearos'
+    private static final String TAG = MyMessageListener.class.getSimpleName();
+    private static final String MESSAGE_PATH = "/cordova/plugin/wearos";
+
+    private Context context;
+
+    public MyMessageListener(Context context) {
+        this.context = context;
+        Log.i(TAG, "constructor");
+    }
+
+    @Override
+    public void onMessageReceived(MessageEvent messageEvent) {
+        Log.i(TAG,"onMessageReceived");
+        if(messageEvent != null && MESSAGE_PATH.equals(messageEvent.getPath())){
+            String message = new String(messageEvent.getData(), StandardCharsets.UTF_8);
+            System.out.println("Message received: " + message);
+        }
+    }
+
+}
+```
+Step 2: You will need to register the listener (prob in the 'main' activity):
+```java
+    protected void listenToMessages(Context context) {
+        Log.i(TAG,"listenToMessages");
+        if (this.messageListener == null) {
+            this.messageListener = new MyMessageListener(context);
+            Wearable.getMessageClient(context).addListener(this.messageListener);
+        }
+    }
 ```
 ## Extra info
 In case your build fails after installing this plugin;<br>
