@@ -95,6 +95,7 @@ You will need to also install the following plugins below.
 ```js
 cordova-plugin-androidx
 cordova-plugin-androidx-adapter
+cordova-android-play-services-gradle-release
 ```
 
 ## Credits
