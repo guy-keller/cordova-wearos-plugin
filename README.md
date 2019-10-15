@@ -40,11 +40,14 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
     
     // Initialised a Session successfully
     var initWatchSuccess = function() {
-        // Sends a message through 'sendMessage'
-        var message = {message: "hello from phone", value: "1234", foo: "bar"};
-        WearOsPlugin.sendMessage(sendMessageSuccess, sendMessageFailure, message);
-	    // Register to receive messages
-        WearOsPlugin.registerMessageListener(receiveMessageSuccess, receiveMessageFailure);
+        // Waits for 2secs, it should be enough to initialise things up, find/connect to the watch
+        window.setTimeout( () => {
+	    // Sends a message through 'sendMessage' - it 'should be' connected now
+            var message = {message: "hello from phone", value: "1234", foo: "bar"};
+            WearOsPlugin.sendMessage(sendMessageSuccess, sendMessageFailure, message);
+	    // Register to receive messages from the watch
+            WearOsPlugin.registerMessageListener(receiveMessageSuccess, receiveMessageFailure);
+	}, 2000);
     };
     var initWatchFailure = function() {
         alert("Could not connect to Watch.");
@@ -97,6 +100,18 @@ cordova-plugin-androidx
 cordova-plugin-androidx-adapter
 cordova-android-play-services-gradle-release
 ```
+
+**VERY IMPORTANT**: Android _versionName_ must match, _versionCode_ must be sequential eg:
+```js
+mobile app
+versionName: "1.6.4"
+versionCode: 10604001
+
+wear app
+versionName: "1.6.4"
+versionCode: 10604002
+```
+https://developer.android.com/training/wearables/apps/packaging#distribution-to-wear-1.x-and-2.0-watches
 
 ## Credits
 [Gui Keller](https://www.github.com/guikeller)
