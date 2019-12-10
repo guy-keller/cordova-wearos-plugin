@@ -92,6 +92,32 @@ Step 2: You will need to register the listener (prob in the 'main' activity):
         }
     }
 ```
+Step 3: To send a message from the watch to the phone:
+```java
+    private static final String MESSAGE_PATH = "/cordova/plugin/wearos";
+
+    // Assumption is made that the mobile and watch are paired and connected
+    public void sendMessage(final String messageToSend) {
+        Log.i(TAG, "sendMessage");
+        NodeClient nodeClient = Wearable.getNodeClient(context);
+        Task<List<Node>> connectedNodes = nodeClient.getConnectedNodes();
+        connectedNodes.addOnCompleteListener(new OnCompleteListener<List<Node>>() {
+            @Override
+            public void onComplete(@NonNull Task<List<Node>> task) {
+                List<Node> nodes = task.getResult();
+                for(Node node : nodes) {
+                    sendMessageToNode(node.getId(), messageToSend);
+                }
+            }
+        });
+    }
+
+    protected void sendMessageToNode(String nodeId, String messageToSend) {
+        Log.i(TAG, "sendMessageToNode");
+        byte[] message = new String(messageToSend).getBytes();
+        Wearable.getMessageClient(context).sendMessage(nodeId, MESSAGE_PATH, message);
+    }
+```
 ## Extra info
 In case your build fails after installing this plugin;<br>
 You will need to also install the following plugins below. 
