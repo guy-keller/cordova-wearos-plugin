@@ -21,12 +21,12 @@ With ionic:
 Edit `www/js/index.js` and add the following code inside `onDeviceReady`
 ```js
     // Receiving messages from Watch
-    var receiveMessageSuccess = function(message){
+    var receiveMessageSuccess = function(message) {
         // Received a message
         var value = JSON.stringify(message);
         alert("Received message from Watch : "+value);
     };
-    var receiveMessageFailure = function(){
+    var receiveMessageFailure = function() {
         alert("Could not receive message from Watch");
     };
 
@@ -34,7 +34,7 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
     var sendMessageSuccess = function() {
         alert("Message sent successfully!");
     };
-    var sendMessageFailure = function(){
+    var sendMessageFailure = function() {
         alert("Could not send message to Watch.");
     };
     
@@ -42,11 +42,13 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
     var initWatchSuccess = function() {
         // Waits for 2secs, it should be enough to initialise things up, find/connect to the watch
         window.setTimeout( () => {
-	    // Sends a message through 'sendMessage' - it 'should be' connected now
-            var message = {message: "hello from phone", value: "1234", foo: "bar"};
-            WearOsPlugin.sendMessage(sendMessageSuccess, sendMessageFailure, message);
 	    // Register to receive messages from the watch
             WearOsPlugin.registerMessageListener(receiveMessageSuccess, receiveMessageFailure);
+	    window.setTimeout( () => {
+	      // Sends a message through 'sendMessage' - it 'should be' connected now
+              var message = {message: "hello from phone", value: "1234", foo: "bar"};
+              WearOsPlugin.sendMessage(sendMessageSuccess, sendMessageFailure, message);
+	    }, 1250);
 	}, 2000);
     };
     var initWatchFailure = function() {
@@ -118,10 +120,25 @@ Step 3: To send a message from the watch to the phone:
         Wearable.getMessageClient(context).sendMessage(nodeId, MESSAGE_PATH, message);
     }
 ```
+Step 4 - add the watch/wearable feature and library to your Android.xml:
+```xml
+<manifest ..shortened_for_brevity>
+
+  <uses-feature android:name="android.hardware.type.watch" />
+
+  <application ..shortened_for_brevity>
+    ...
+    <uses-library
+            android:name="com.google.android.wearable"
+            android:required="true" />
+    ...
+  </application>
+</manifest>
+```
 ## Extra info
 In case your build fails after installing this plugin;<br>
 You will need to also install the following plugins below. 
-```js
+```bash
 cordova-plugin-androidx
 cordova-plugin-androidx-adapter
 cordova-android-play-services-gradle-release
