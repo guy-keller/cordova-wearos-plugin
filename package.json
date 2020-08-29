@@ -1,6 +1,6 @@
 {
     "name": "cordova-wearos-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Communication from your Cordova application to a WearOS application.",
     "cordova": {
       "id": "cordova-wearos-plugin",
@@ -20,16 +20,13 @@
       "ecosystem:cordova",
       "cordova-android"
     ],
-    "engines": [
-      {
-        "name": "cordova",
-        "version": ">=7.1.0"
-      },
-      {
-        "name": "cordova-android",
-        "version": ">=7.0.0"
-      }
-    ],
+    "engines": [{
+      "name": "cordova",
+      "version": ">=7.1.0"
+    }, {
+      "name": "cordova-android",
+      "version": ">=7.0.0"
+    }],
     "author": "Gui Keller",
     "license": "MIT",
     "bugs": {
