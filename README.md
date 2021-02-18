@@ -2,6 +2,11 @@
 
 Simple plugin that establishes a session with a WearOs Watch and helps exchange of messages between a hybrid application and its WearOs application and vice-versa.
 
+### Java Source (Cordova WearOS Plugin)
+
+This plugin uses an .AAR file that is created from here:<br>
+https://github.com/guikeller/cordova-wearos-plugin-source
+
 ## Installation
 
 ### With cordova-cli
